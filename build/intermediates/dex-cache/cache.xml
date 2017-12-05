@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/abc17034/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.2.0/f7873a2ebde246a45c2a8d6f3247108b4c88a879/okhttp-3.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f7873a2ebde246a45c2a8d6f3247108b4c88a879">
+        <dex dex="/Users/abc17034/Weather/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.2.0_6b7b9cc84cc87ae9439e69413926f28ea62daee5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/abc17034/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="/Users/abc17034/Weather/app/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.6.0_c7a8fe164b82c14b71912d3ba636d51789ae402b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/abc17034/Weather/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="30f282b4be1c562526527e0e893445479b43b4c4">
+        <dex dex="/Users/abc17034/Weather/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_8a07a20242667151039e5c7a5e464abe22d20bda/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/abc17034/Weather/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/abc17034/Weather/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_acf0a745d76cfc16a775ad0cf6407aa6dd57182f/classes.dex" />
+    </item>
+
+</items>

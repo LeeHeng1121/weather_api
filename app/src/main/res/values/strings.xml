@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="sapporoText">札幌</string>
+    <string name="yokohamaText">横浜</string>
+    <string name="taipeiText">台北</string>
+    <string name="vietnamText">ベトナム</string>
+    <string name="button_api">APIKEY変更</string>
+    <string name="back">戻る</string>
+    <string name="place"> </string>
+    <string name="time"> </string>
+    <string name="weather"> </string>
+    <string name="temperature"> </string>
+    <string name="max"> </string>
+    <string name="min"> </string>
+    <string name="forecastText">forecastText</string>
+</resources>
