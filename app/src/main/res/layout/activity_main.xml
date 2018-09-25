@@ -12,8 +12,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sapporoText"
-            android:id="@+id/button_sapporo"
+            android:text="@string/SeattleText"
+            android:id="@+id/button_seattle"
             android:onClick="buttonOnClick"/>
         <Button
             android:layout_width="wrap_content"
@@ -28,12 +28,12 @@
             android:text="@string/taipeiText"
             android:id="@+id/button_taipei"
             android:onClick="buttonOnClick"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/vietnamText"
-            android:id="@+id/button_vietnam"
-            android:onClick="buttonOnClick"/>
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/vietnamText"-->
+            <!--android:id="@+id/button_vietnam"-->
+            <!--android:onClick="buttonOnClick"/>-->
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

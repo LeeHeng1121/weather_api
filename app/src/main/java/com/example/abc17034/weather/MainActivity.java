@@ -12,10 +12,10 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +23,11 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.util.Date;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 
 public class MainActivity extends Activity{
     String place = "";
@@ -32,10 +37,11 @@ public class MainActivity extends Activity{
     String location_code_taipei = "4-315078_1_AL";
     String location_code_vietnam = "1-353981_1_AL";
     String location_code_yokohama = "2383413";
-    String location_code_sapporo = "1-223985_1_AL";
-
+    String location_code_seattle = "331424";
     String location_code="";
     String ENDPOINT= "";
+    final String tag = "MainActivity";
+
     int flag=0;
     private RequestQueue requestQueue;
     @Override
@@ -46,14 +52,19 @@ public class MainActivity extends Activity{
 
     }
 
+
     private void fetchPosts(int i) {
+
+
         if (i==1){
-            ENDPOINT= "http://dataservice.accuweather.com/currentconditions/v1/"+location_code+"?apikey=" + apikey +"&language=ja";
+            ENDPOINT= "http://dataservice.accuweather.com/currentconditions/v1/"+location_code+"?apikey=" + apikey +"&language=en";
         }else if (i==2){
-            ENDPOINT = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/" + location_code + "?apikey=" + apikey + "&language=ja&metric=true";
+            ENDPOINT = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/" + location_code + "?apikey=" + apikey + "&language=en&metric=true";
         }
         StringRequest request = new StringRequest(Request.Method.GET, ENDPOINT, onPostsLoaded, onPostsError);
         requestQueue.add(request);
+
+
     }
 
 
@@ -66,6 +77,7 @@ public class MainActivity extends Activity{
                 try {
                     JSONArray jArr = new JSONArray(response);
                     JSONObject jo = jArr.getJSONObject(0);
+
                     System.out.println("LocalObservationDateTime:" + jo.getString("LocalObservationDateTime"));
                     TextView tmp = findViewById(R.id.time);
                     SimpleDateFormat timetmp = new SimpleDateFormat(jo.getString("LocalObservationDateTime"));
@@ -92,23 +104,51 @@ public class MainActivity extends Activity{
                     e.printStackTrace();
                 }
                 try {
-                    JSONObject jo = new JSONObject(response);
-                    JSONObject Headline = jo.getJSONObject("Headline");
-                    System.out.println("Text:" + Headline.getString("Text"));
-                    JSONArray DailyForecasts = jo.getJSONArray("DailyForecasts");
-                    JSONObject jo2 = DailyForecasts.getJSONObject(0);
-                    JSONObject Temperature = jo2.getJSONObject("Temperature");
-                    JSONObject Minimum = Temperature.getJSONObject("Minimum");
-                    JSONObject Maximum = Temperature.getJSONObject("Maximum");
-                    System.out.println("Minimum:" + Minimum.getString("Value"));
-                    System.out.println("Maximum:" + Maximum.getString("Value"));
-                    TextView tmp;
-                    tmp = findViewById(R.id.forcastText);
-                    tmp.setText(Headline.getString("Text"));
-                    tmp = findViewById(R.id.min);
-                    tmp.setText(Minimum.getString("Value"));
-                    tmp = findViewById(R.id.max);
-                    tmp.setText(Maximum.getString("Value"));
+                    JSONObject Temperature_jo = new JSONObject(response);
+                    Observable<JSONObject> observable = Observable.just(Temperature_jo);
+                    Observer<JSONObject> observer = new Observer<JSONObject>() {
+
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(JSONObject jsonObject) {
+                            Log.d(tag, "Item: " + jsonObject.toString());
+                            TextView tmp;
+                            try {
+                                JSONArray DailyForecasts = jsonObject.getJSONArray("DailyForecasts");
+                                JSONObject jo2 = DailyForecasts.getJSONObject(0);
+                                JSONObject Temperature = jo2.getJSONObject("Temperature");
+                                final JSONObject Minimum = Temperature.getJSONObject("Minimum");
+                                final JSONObject Maximum = Temperature.getJSONObject("Maximum");
+                                tmp = findViewById(R.id.forcastText);
+                                JSONObject Headline = jsonObject.getJSONObject("Headline");
+                                tmp.setText(Headline.getString("Text"));
+                                tmp = findViewById(R.id.min);
+                                tmp.setText(Minimum.getString("Value"));
+                                tmp = findViewById(R.id.max);
+                                tmp.setText(Maximum.getString("Value"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.d(tag, "Error!");
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+
+                    };
+
+                    observable.subscribe(observer);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -119,7 +159,7 @@ public class MainActivity extends Activity{
     private final Response.ErrorListener onPostsError = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            Log.e("PostActivity", error.toString());
+            Log.e("Response.ErrorListener", error.toString());
         }
     };
 
@@ -127,9 +167,9 @@ public class MainActivity extends Activity{
     public void buttonOnClick(View view) {
         switch (view.getId())
         {
-            case R.id.button_sapporo:
-                place="Sapporo";
-                location_code=location_code_sapporo;
+            case R.id.button_seattle:
+                place="Seattle";
+                location_code= location_code_seattle;
                 fetchPosts(1);
                 fetchPosts(2);
                 setContentView(R.layout.weather);
@@ -148,13 +188,13 @@ public class MainActivity extends Activity{
                 fetchPosts(2);
                 setContentView(R.layout.weather);
                 break;
-            case R.id.button_vietnam:
-                place="Vietnam";
-                location_code=location_code_vietnam;
-                fetchPosts(1);
-                fetchPosts(2);
-                setContentView(R.layout.weather);
-                break;
+//            case R.id.button_vietnam:
+//                place="Vietnam";
+//                location_code=location_code_vietnam;
+//                fetchPosts(1);
+//                fetchPosts(2);
+//                setContentView(R.layout.weather);
+//                break;
             case R.id.button_GoHome:
                 setContentView(R.layout.activity_main);
                 break;
@@ -169,5 +209,7 @@ public class MainActivity extends Activity{
                 break;
         }
     }
+
+
 
 }

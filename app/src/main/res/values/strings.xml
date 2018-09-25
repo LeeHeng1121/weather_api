@@ -1,16 +1,25 @@
 <resources>
     <string name="app_name">Weather</string>
-    <string name="sapporoText">札幌</string>
-    <string name="yokohamaText">横浜</string>
-    <string name="taipeiText">台北</string>
-    <string name="vietnamText">ベトナム</string>
-    <string name="button_api">APIKEY変更</string>
-    <string name="back">戻る</string>
+    <string name="SeattleText">Seattle</string>
+    <string name="yokohamaText">Yokohama</string>
+    <string name="taipeiText">Taipei</string>
+    <string name="vietnamText">Vietnam</string>
+    <string name="button_api">Change APIKEY</string>
+    <string name="back">Back</string>
     <string name="place"> </string>
     <string name="time"> </string>
     <string name="weather"> </string>
     <string name="temperature"> </string>
     <string name="max"> </string>
     <string name="min"> </string>
-    <string name="forecastText">forecastText</string>
+    <string name="forecast">forecastText</string>
+
+    <string name="timeText">Time:</string>
+    <string name="placeText">Place:</string>
+    <string name="temperatureText">Temperature:</string>
+    <string name="statusText">Status:</string>
+    <string name="maxText">Highest temperature:</string>
+    <string name="minText">Lowest temperature:</string>
+    <string name="forecastText">Forecast:</string>
+
 </resources>
